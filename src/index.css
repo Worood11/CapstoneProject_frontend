@@ -1,0 +1,18 @@
+:root {
+  --primary-color: #63976A;
+  --primary-dark: #4d7a55;
+  --primary-light: #8cbf8c;
+  --text-light: #ffffff;
+  --text-dark: #333333;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  font-family:
+    'Poppins', 'Inter', 'Roboto',
+    'Cairo', 'Tajawal', 'Almarai',
+    sans-serif;
+}
