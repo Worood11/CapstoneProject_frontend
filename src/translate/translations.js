@@ -7,7 +7,7 @@ const translations = {
     toggle: "العربية",
     event: "حدث",
     search: "Search",
-    addBookstore: "Create New Bookstore"
+    addBookstore: "Add a Bookstore"
     
   },
   ar: {

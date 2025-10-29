@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./styles.css";
 import BookstoreCard from "../../components/BookstoreCard/BookstoreCard";
 
 // APIs

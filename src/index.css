@@ -4,10 +4,13 @@
   --primary-light: #8cbf8c;
   --text-light: #ffffff;
   --text-dark: #333333;
+    --light-bg: #f8f9fa;
+
 }
 
 * {
   margin: 0;
+  box-sizing: border-box; 
 }
 
 body {
@@ -18,8 +21,13 @@ body {
 }
 
 .card-container {
-  padding: 0 30px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  gap: 20px; 
+  margin: 0 auto;
+  padding: 20px; 
+  box-sizing: border-box;
+  max-width: 1200px; 
 }
+

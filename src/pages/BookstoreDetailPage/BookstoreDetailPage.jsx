@@ -35,20 +35,41 @@ export default function BookstoreDetailPage() {
           src={bookstoreDetail.image || "/placeholder.png"}
           alt={bookstoreDetail.name || "Bookstore"}
         />
+
         <p>
-          <small>
-            {bookstoreDetail.description || "No description available"}
-          </small>
+          <strong>Description: </strong>
+          {bookstoreDetail.description || "No description available"}
         </p>
         <p>
           <strong>City:</strong> {bookstoreDetail.city || "Unknown"}
         </p>
+        <p className="location">
+          <strong>Location:</strong>{" "}
+          {bookstoreDetail.map_url ? (
+            <a
+              href={bookstoreDetail.map_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="map-link"
+            >
+              Open Map
+            </a>
+          ) : (
+            "Unknown"
+          )}
+        </p>
       </div>
-      <div className="cat-actions">
-        <Link to={`/bookstores/edit/${bookstoreDetail.id}`} className="btn warn">
+      <div className="bookstore-actions">
+        <Link
+          to={`/bookstores/edit/${bookstoreDetail.id}`}
+          className="btn primary"
+        >
           Edit
         </Link>
-        <Link to={`/bookstores/confirm_delete/${bookstoreDetail.id}`} className="btn danger">
+        <Link
+          to={`/bookstores/confirm_delete/${bookstoreDetail.id}`}
+          className="btn danger"
+        >
           Delete
         </Link>
       </div>

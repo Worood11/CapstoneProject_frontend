@@ -1,11 +1,16 @@
+import "./styles.css";
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams, Link } from "react-router";
 // APIs
 import * as bookstoreAPI from "../../utilities/bookstore-api";
 
-export default function BookstoreFormPage({ createBookstore, editeBookstore, deleteBookstore }) {
-  const { id } = useParams(); 
-  const [CurrBookstore, setCurrBookstore] = useState(null); 
+export default function BookstoreFormPage({
+  createBookstore,
+  editeBookstore,
+  deleteBookstore,
+}) {
+  const { id } = useParams();
+  const [CurrBookstore, setCurrBookstore] = useState(null);
   const navigate = useNavigate();
 
   const initialState = {
@@ -17,7 +22,6 @@ export default function BookstoreFormPage({ createBookstore, editeBookstore, del
   };
 
   const [formData, setFormData] = useState(initialState);
-
 
   useEffect(() => {
     async function getAndSetDetail() {
@@ -35,21 +39,17 @@ export default function BookstoreFormPage({ createBookstore, editeBookstore, del
     if ((editeBookstore || deleteBookstore) && id) getAndSetDetail();
   }, [id, editeBookstore, deleteBookstore]);
 
-
   function handleChange(evt) {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   }
-
 
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
       let result;
       if (editeBookstore && CurrBookstore) {
-     
         result = await bookstoreAPI.update(CurrBookstore.id, formData);
       } else if (createBookstore) {
-        
         result = await bookstoreAPI.create(formData);
       }
 
@@ -60,7 +60,6 @@ export default function BookstoreFormPage({ createBookstore, editeBookstore, del
     }
   }
 
- 
   async function handleDelete(evt) {
     evt.preventDefault();
     try {
@@ -74,34 +73,45 @@ export default function BookstoreFormPage({ createBookstore, editeBookstore, del
     }
   }
 
-  
-  if ((deleteBookstore || editeBookstore) && !CurrBookstore) return <h1>Loading...</h1>;
+  if ((deleteBookstore || editeBookstore) && !CurrBookstore)
+    return <h1>Loading...</h1>;
 
   
   if (deleteBookstore && CurrBookstore)
     return (
-      <>
-        <div className="page-header">
-          <h1>Delete Bookstore?</h1>
+      <div className="delete-container">
+        <div className="form-container">
+          <div className="page-header">
+            <h1>Delete Bookstore?</h1>
+          </div>
+          <h2>
+            Are you sure you want to delete{" "}
+            <span style={{ color: "var(--primary-dark)" }}>
+              {CurrBookstore.name}
+            </span>
+            ?
+          </h2>
+          <form onSubmit={handleDelete}>
+            <Link to={`/bookstores/${CurrBookstore.id}`} className="btn cancel">
+              Cancel
+            </Link>
+            <button type="submit" className="btn danger">
+              Yes - Delete!
+            </button>
+          </form>
         </div>
-        <h2>Are you sure you want to delete {CurrBookstore.name}?</h2>
-        <form onSubmit={handleDelete}>
-          <Link to={`/bookstores/${CurrBookstore.id}`} className="btn secondary">
-            Cancel
-          </Link>
-          <button type="submit" className="btn danger">
-            Yes - Delete!
-          </button>
-        </form>
-      </>
+      </div>
     );
 
-  
   if (createBookstore || editeBookstore)
     return (
       <>
         <div className="page-header">
-          {editeBookstore ? <h1>Edit {CurrBookstore.name}'s Info</h1> : <h1>Add a Bookstore</h1>}
+          {editeBookstore ? (
+            <h1>Edit {CurrBookstore.name}'s Info</h1>
+          ) : (
+            <h1>Add a Bookstore</h1>
+          )}
         </div>
         <form className="form-container" onSubmit={handleSubmit}>
           <table>

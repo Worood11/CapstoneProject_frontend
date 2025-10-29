@@ -1,24 +1,26 @@
 import "./styles.css";
 import { Link } from "react-router";
 export default function BookstoreCard({ bookstore }) {
-  if (!bookstore) return null; 
+  if (!bookstore) return null;
 
-  console.log(bookstore, "line 6 ")
+  console.log(bookstore, "line 6 ");
 
   return (
     <div className="bookstore-card">
-      <Link to = {`/bookstores/${bookstore.id}`}>
-      <div className="bookstore-card-content">
-        <h2>{bookstore.name}</h2>
-        <img 
-          src={bookstore?.image || "/placeholder.png"} 
-          alt={bookstore?.name || "Bookstore"} 
+      <Link to={`/bookstores/${bookstore.id}`} className="bookstore-link">
+        <img
+          src={bookstore?.image || "/placeholder.png"}
+          alt={bookstore?.name || "Bookstore"}
         />
-        <p>
-          <small>{bookstore.description || "No description available"}</small>
-        </p>
-        <p><strong>City:</strong> {bookstore.city || "Unknown"}</p>
-      </div>
+        <div className="bookstore-card-content">
+          <h2 className="bookstore-name">{bookstore.name}</h2>
+          <p className="bookstore-description">
+            <small>{bookstore.description || "No description available"}</small>
+          </p>
+          <p className="meta">
+            <strong>City:</strong> {bookstore.city || "Unknown"}
+          </p>
+        </div>
       </Link>
     </div>
   );
