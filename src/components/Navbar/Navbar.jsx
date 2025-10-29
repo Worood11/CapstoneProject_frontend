@@ -21,7 +21,10 @@ export default function Navbar() {
           <Link to="/">{translations[lang].home}</Link>
         </li>
         <li>
-          <Link to="/libraries">{translations[lang].bookstores}</Link>
+          <Link to="/bookstores">{translations[lang].bookstores}</Link>
+        </li>
+        <li>
+          <Link to="/bookstores/new">{translations[lang].addBookstore}</Link>
         </li>
         <li>
           <Link to="/about">{translations[lang].about}</Link>

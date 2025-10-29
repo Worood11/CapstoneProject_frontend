@@ -5,7 +5,9 @@ const translations = {
     bookstores: "Bookstores",
     about: "About",
     toggle: "العربية",
+    event: "حدث",
     search: "Search",
+    addBookstore: "Create New Bookstore"
     
   },
   ar: {
@@ -14,7 +16,9 @@ const translations = {
     bookstores: "متاجر الكتب",
     about: "حول",
     toggle: "English",
+    event : "Event",
     search: "بحث",
+    addBookstore: "أضف متجرك",
   
   },
 };
