@@ -84,7 +84,7 @@ export default function BookstoreDetailPage() {
               </small>
 
               <button
-                className="btn danger"
+                className="delete-btn"
                 onClick={async () => {
                   try {
                     await reviewsAPI.remove(review.id);
@@ -94,7 +94,7 @@ export default function BookstoreDetailPage() {
                   }
                 }}
               >
-                Delete
+                &times;
               </button>
             </div>
           ))

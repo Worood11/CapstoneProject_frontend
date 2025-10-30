@@ -121,6 +121,20 @@
     border-color: var(--primary-dark);
 }
 
+.delete-btn {
+    background: transparent;
+    color: #d9534f;
+    border: none;
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    transition: color 0.2s ease, transform 0.1s ease;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
 
 .btn.danger {
     background-color: #dc3545;

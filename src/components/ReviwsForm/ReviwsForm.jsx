@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./styles.css";
 import * as reviewsAPI from "../../utilities/reviews-api";
 
 export default function ReviewForm({ bookstoreDetail, reviews, setReviews }) {
@@ -19,11 +20,11 @@ export default function ReviewForm({ bookstoreDetail, reviews, setReviews }) {
     try {
       evt.preventDefault();
       const updatedReviews = await reviewsAPI.create(formData, bookstoreDetail.id);
-      setReviews(updatedReviews); // update reviews list in parent
-      setFormData(initialState);  // reset form
+      setReviews(updatedReviews); 
+      setFormData(initialState); 
     } catch (err) {
       console.log(err);
-      setReviews([...reviews]); // keep old reviews if error
+      setReviews([...reviews]);
     }
   }
 
