@@ -1,17 +1,22 @@
 import "./styles.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useContext } from "react";
 import { useNavigate, useParams, Link } from "react-router";
+import { LanguageContext } from "../../context/LanguageContext";
+import translations from "../../translate/translations";
 // APIs
 import * as bookstoreAPI from "../../utilities/bookstore-api";
 
 export default function BookstoreFormPage({
+  
   createBookstore,
   editeBookstore,
   deleteBookstore,
-}) {
+})  {
   const { id } = useParams();
-  const [CurrBookstore, setCurrBookstore] = useState(null);
+  const { lang, toggleLang } = useContext(LanguageContext);
   const navigate = useNavigate();
+  const [CurrBookstore, setCurrBookstore] = useState(null);
+ 
 
   const initialState = {
     name: "",
@@ -22,6 +27,7 @@ export default function BookstoreFormPage({
   };
 
   const [formData, setFormData] = useState(initialState);
+  
 
   useEffect(() => {
     async function getAndSetDetail() {
@@ -82,21 +88,21 @@ export default function BookstoreFormPage({
       <div className="delete-container">
         <div className="form-container">
           <div className="page-header">
-            <h1>Delete Bookstore?</h1>
+            <h1>{translations[lang].deleteBS}</h1>
           </div>
           <h2>
-            Are you sure you want to delete{" "}
+            {translations[lang].areYouSure}{" "}
             <span style={{ color: "var(--primary-dark)" }}>
               {CurrBookstore.name}
             </span>
-            ?
+            {translations[lang].qMark}
           </h2>
           <form onSubmit={handleDelete}>
             <Link to={`/bookstores/${CurrBookstore.id}`} className="btn cancel">
-              Cancel
+              {translations[lang].btnCancel}
             </Link>
             <button type="submit" className="btn danger">
-              Yes - Delete!
+              {translations[lang].btndeletey}
             </button>
           </form>
         </div>
@@ -110,7 +116,7 @@ export default function BookstoreFormPage({
           {editeBookstore ? (
             <h1>Edit {CurrBookstore.name}'s Info</h1>
           ) : (
-            <h1>Add a Bookstore</h1>
+            <h1>{translations[lang].addBookstore}</h1>
           )}
         </div>
         <form className="form-container" onSubmit={handleSubmit}>
@@ -119,7 +125,7 @@ export default function BookstoreFormPage({
               {!editeBookstore && (
                 <tr>
                   <th>
-                    <label htmlFor="id_name">Name:</label>
+                    <label htmlFor="id_name">{translations[lang].bStoreName}</label>
                   </th>
                   <td>
                     <input
@@ -136,7 +142,7 @@ export default function BookstoreFormPage({
               )}
               <tr>
                 <th>
-                  <label htmlFor="id_city">City:</label>
+                  <label htmlFor="id_city">{translations[lang].bStoreCity}</label>
                 </th>
                 <td>
                   <input
@@ -152,7 +158,7 @@ export default function BookstoreFormPage({
               </tr>
               <tr>
                 <th>
-                  <label htmlFor="id_description">Description:</label>
+                  <label htmlFor="id_description">{translations[lang].bStoreDesc}</label>
                 </th>
                 <td>
                   <input
@@ -168,7 +174,7 @@ export default function BookstoreFormPage({
               </tr>
               <tr>
                 <th>
-                  <label htmlFor="id_image">Image URL:</label>
+                  <label htmlFor="id_image">{translations[lang].bStoreImg}</label>
                 </th>
                 <td>
                   <input
@@ -183,7 +189,7 @@ export default function BookstoreFormPage({
               </tr>
               <tr>
                 <th>
-                  <label htmlFor="id_map_url">Map URL:</label>
+                  <label htmlFor="id_map_url">{translations[lang].bStoreMap}</label>
                 </th>
                 <td>
                   <input
@@ -199,7 +205,7 @@ export default function BookstoreFormPage({
             </tbody>
           </table>
           <button type="submit" className="btn end submit">
-            Submit!
+            {translations[lang].btnSubmit}
           </button>
         </form>
       </>

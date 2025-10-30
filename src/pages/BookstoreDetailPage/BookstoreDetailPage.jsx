@@ -87,8 +87,8 @@ export default function BookstoreDetailPage() {
                 className="btn danger"
                 onClick={async () => {
                   try {
-                    await reviewsAPI.remove(review.id); // DELETE request
-                    setReviews(reviews.filter((r) => r.id !== review.id)); // update state
+                    await reviewsAPI.remove(review.id);
+                    setReviews(reviews.filter((r) => r.id !== review.id));
                   } catch (err) {
                     console.log(err);
                   }

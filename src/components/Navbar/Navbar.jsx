@@ -5,10 +5,10 @@ import { LanguageContext } from "../../context/LanguageContext";
 import translations from "../../translate/translations";
 
 export default function Navbar() {
-  const { lang, toggleLang } = useContext(LanguageContext);
+  const { lang,dir, toggleLang } = useContext(LanguageContext);
 
   return (
-    <nav className={`navbar ${lang === "ar" ? "rtl" : "ltr"}`}>
+    <nav className={`navbar ${dir}`}>
       <div className="logo">{translations[lang].logo}</div>
 
       <input type="checkbox" id="check" className="check" />

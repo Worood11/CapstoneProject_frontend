@@ -15,8 +15,10 @@ export function LanguageProvider({ children }) {
     document.body.dir = lang === "ar" ? "rtl" : "ltr";
   }, [lang]);
 
+  const dir = lang === "ar" ? "rtl" : "ltr";
+
   return (
-    <LanguageContext.Provider value={{ lang, toggleLang }}>
+    <LanguageContext.Provider value={{ lang, dir, toggleLang }}>
       {children}
     </LanguageContext.Provider>
   );
