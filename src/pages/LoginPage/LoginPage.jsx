@@ -15,14 +15,14 @@ export default function LoginPage({ user, setUser }) {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   }
 
-  // Handle form submission
+
   async function handleLogin(evt) {
     evt.preventDefault();
     try {
       const loggedInUser = await usersAPI.login(formData);
       setUser(loggedInUser);
 
-      // 🕐 Small delay to let the form finish submitting before unmounting
+
       setTimeout(() => {
         navigate("/bookstores");
       }, 0);
