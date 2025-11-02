@@ -19,9 +19,12 @@ export default function ReviewForm({ bookstoreDetail, reviews, setReviews }) {
   async function handleSubmit(evt) {
     try {
       evt.preventDefault();
-      const updatedReviews = await reviewsAPI.create(formData, bookstoreDetail.id);
-      setReviews(updatedReviews); 
-      setFormData(initialState); 
+      const updatedReviews = await reviewsAPI.create(
+        formData,
+        bookstoreDetail.id
+      );
+      setReviews(updatedReviews);
+      setFormData(initialState);
     } catch (err) {
       console.log(err);
       setReviews([...reviews]);
@@ -66,7 +69,9 @@ export default function ReviewForm({ bookstoreDetail, reviews, setReviews }) {
           required
         />
       </p>
-      <button type="submit" className="btn submit">Add Review</button>
+      <button type="submit" className="btn submit">
+        Add Review
+      </button>
     </form>
   );
 }

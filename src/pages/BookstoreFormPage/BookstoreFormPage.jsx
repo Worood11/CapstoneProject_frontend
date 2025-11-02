@@ -1,5 +1,5 @@
 import "./styles.css";
-import React, { useState, useEffect , useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams, Link } from "react-router";
 import { LanguageContext } from "../../context/LanguageContext";
 import translations from "../../translate/translations";
@@ -7,16 +7,14 @@ import translations from "../../translate/translations";
 import * as bookstoreAPI from "../../utilities/bookstore-api";
 
 export default function BookstoreFormPage({
-  
   createBookstore,
   editeBookstore,
   deleteBookstore,
-})  {
+}) {
   const { id } = useParams();
   const { lang, toggleLang } = useContext(LanguageContext);
   const navigate = useNavigate();
   const [CurrBookstore, setCurrBookstore] = useState(null);
- 
 
   const initialState = {
     name: "",
@@ -27,7 +25,6 @@ export default function BookstoreFormPage({
   };
 
   const [formData, setFormData] = useState(initialState);
-  
 
   useEffect(() => {
     async function getAndSetDetail() {
@@ -82,7 +79,6 @@ export default function BookstoreFormPage({
   if ((deleteBookstore || editeBookstore) && !CurrBookstore)
     return <h1>Loading...</h1>;
 
-  
   if (deleteBookstore && CurrBookstore)
     return (
       <div className="delete-container">
@@ -125,7 +121,9 @@ export default function BookstoreFormPage({
               {!editeBookstore && (
                 <tr>
                   <th>
-                    <label htmlFor="id_name">{translations[lang].bStoreName}</label>
+                    <label htmlFor="id_name">
+                      {translations[lang].bStoreName}
+                    </label>
                   </th>
                   <td>
                     <input
@@ -142,7 +140,9 @@ export default function BookstoreFormPage({
               )}
               <tr>
                 <th>
-                  <label htmlFor="id_city">{translations[lang].bStoreCity}</label>
+                  <label htmlFor="id_city">
+                    {translations[lang].bStoreCity}
+                  </label>
                 </th>
                 <td>
                   <input
@@ -158,7 +158,9 @@ export default function BookstoreFormPage({
               </tr>
               <tr>
                 <th>
-                  <label htmlFor="id_description">{translations[lang].bStoreDesc}</label>
+                  <label htmlFor="id_description">
+                    {translations[lang].bStoreDesc}
+                  </label>
                 </th>
                 <td>
                   <input
@@ -174,7 +176,9 @@ export default function BookstoreFormPage({
               </tr>
               <tr>
                 <th>
-                  <label htmlFor="id_image">{translations[lang].bStoreImg}</label>
+                  <label htmlFor="id_image">
+                    {translations[lang].bStoreImg}
+                  </label>
                 </th>
                 <td>
                   <input
@@ -189,7 +193,9 @@ export default function BookstoreFormPage({
               </tr>
               <tr>
                 <th>
-                  <label htmlFor="id_map_url">{translations[lang].bStoreMap}</label>
+                  <label htmlFor="id_map_url">
+                    {translations[lang].bStoreMap}
+                  </label>
                 </th>
                 <td>
                   <input

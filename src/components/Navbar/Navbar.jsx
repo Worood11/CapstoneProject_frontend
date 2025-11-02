@@ -36,9 +36,6 @@ export default function Navbar({ user, setUser }) {
           <li>
             <Link to="/bookstores/new">{translations[lang].addBookstore}</Link>
           </li>
-          <li>
-            <Link to="/about">{translations[lang].about}</Link>
-          </li>
           <form id="logout-form" onSubmit={handleLogout}>
             <button type="submit">Log out</button>
           </form>
@@ -65,7 +62,7 @@ export default function Navbar({ user, setUser }) {
             <Link to="/">{translations[lang].home}</Link>
           </li>
           <li>
-            <Link to="/about">{translations[lang].about}</Link>
+            <Link to="/login">{translations[lang].login}</Link>
           </li>
           <li>
             <Link to="/signup">SignUp</Link>

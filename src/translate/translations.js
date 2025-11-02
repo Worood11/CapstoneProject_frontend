@@ -1,9 +1,13 @@
+import { signup } from "../utilities/users-api";
+
 const translations = {
   en: {
     logo: "BookStop",
     home: "Home",
     bookstores: "Bookstores",
-    about: "About",
+    login: "Login",
+    signup: "Singup",
+    logout: "Logout",
     toggle: "العربية",
     event: "Event",
     search: "Search",
@@ -25,7 +29,9 @@ const translations = {
     logo: "محطة الكتب",
     home: "الرئيسية",
     bookstores: "متاجر الكتب",
-    about: "حول",
+    login: "تسجيل دخول",
+    logout:"تسجيل خروج",
+    signup: "تسجيل",
     toggle: "English",
     event : "حدث",
     search: "بحث",
