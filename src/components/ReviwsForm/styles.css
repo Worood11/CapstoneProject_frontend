@@ -1,9 +1,31 @@
+
+.add-review-btn {
+    display: block;
+    margin: 1.5rem auto;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-review-btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+
 .form-container {
     max-width: 600px;
-    margin: 2rem auto;
+    margin: 1.5rem auto;
     padding: 1.8rem;
     background-color: var(--text-light);
     border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
 }
 
@@ -29,12 +51,12 @@
     background-color: var(--light-bg);
     transition: all 0.3s ease;
 }
+
 .form-container input:focus,
 .form-container select:focus,
 .form-container textarea:focus {
     border-color: var(--primary-color);
     outline: none;
-
 }
 
 textarea {
@@ -42,6 +64,9 @@ textarea {
     resize: vertical;
 }
 
+.btn{
+    margin: 5px;
+}
 .btn.submit {
     width: 100%;
     background-color: var(--primary-color);
@@ -53,10 +78,29 @@ textarea {
     cursor: pointer;
     font-weight: 600;
     transition: background-color 0.3s ease, transform 0.2s ease;
+    
 }
 
 .btn.submit:hover {
     background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.btn.cancel {
+    width: 100%;
+    background-color: #ccc;
+    color: var(--text-dark);
+    border: none;
+    padding: 0.8rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn.cancel:hover {
+    background-color: #b0b0b0;
     transform: translateY(-2px);
 }
 
@@ -71,7 +115,7 @@ textarea {
     padding: 1rem 1.2rem;
     border-radius: 12px;
     margin-bottom: 1rem;
-
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
 }
 
 .review-card h4 {
@@ -94,8 +138,6 @@ textarea {
 }
 
 
-
-
 html[lang="ar"] .delete-btn {
     right: auto;
     left: 10px;
@@ -107,14 +149,14 @@ html[lang="ar"] .delete-btn {
 }
 
 
-
-
 @media (max-width: 600px) {
     .form-container {
         padding: 1rem;
     }
 
-    .btn.submit {
+    .btn.submit,
+    .btn.cancel,
+    .add-review-btn {
         font-size: 0.9rem;
         padding: 0.7rem;
     }

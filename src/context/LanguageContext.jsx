@@ -12,7 +12,7 @@ export function LanguageProvider({ children }) {
   };
 
   useEffect(() => {
-    document.body.dir = lang === "ar" ? "rtl" : "ltr";
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
   }, [lang]);
 
   const dir = lang === "ar" ? "rtl" : "ltr";

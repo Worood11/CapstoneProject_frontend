@@ -122,7 +122,7 @@ export default function BookstoreFormPage({
                 <tr>
                   <th>
                     <label htmlFor="id_name">
-                      {translations[lang].bStoreName}
+                      {translations[lang].name}:
                     </label>
                   </th>
                   <td>
@@ -141,7 +141,7 @@ export default function BookstoreFormPage({
               <tr>
                 <th>
                   <label htmlFor="id_city">
-                    {translations[lang].bStoreCity}
+                    {translations[lang].city}:
                   </label>
                 </th>
                 <td>
@@ -159,7 +159,7 @@ export default function BookstoreFormPage({
               <tr>
                 <th>
                   <label htmlFor="id_description">
-                    {translations[lang].bStoreDesc}
+                    {translations[lang].description}:
                   </label>
                 </th>
                 <td>
@@ -177,7 +177,7 @@ export default function BookstoreFormPage({
               <tr>
                 <th>
                   <label htmlFor="id_image">
-                    {translations[lang].bStoreImg}
+                    {translations[lang].bStoreImg}:
                   </label>
                 </th>
                 <td>
@@ -194,7 +194,7 @@ export default function BookstoreFormPage({
               <tr>
                 <th>
                   <label htmlFor="id_map_url">
-                    {translations[lang].bStoreMap}
+                    {translations[lang].bStoreMap}:
                   </label>
                 </th>
                 <td>

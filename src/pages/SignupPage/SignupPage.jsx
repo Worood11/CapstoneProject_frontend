@@ -1,11 +1,12 @@
-// IMPORTS
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router";
-
+import { LanguageContext } from "../../context/LanguageContext";
+import translations from "../../translate/translations";
 // APIs
 import * as usersAPI from "../../utilities/users-api.js";
 
 export default function SignupPage({ setUser }) {
+  const { lang, toggleLang } = useContext(LanguageContext);
   const navigate = useNavigate();
   const initialState = {
     username: "",
@@ -75,86 +76,86 @@ export default function SignupPage({ setUser }) {
   return (
     <>
       <div className="page-header">
-        <h1>Sign Up</h1>
+        <h1>{translations[lang].signup}</h1>{" "}
       </div>
-      <form onSubmit={handleSubmit} className="form-container signup">
-        <table>
-          <tbody>
-            <tr>
-              <th>
-                <label htmlFor="id_username">Username:</label>
-              </th>
-              <td>
-                <input
-                  type="text"
-                  value={formData.username}
-                  name="username"
-                  minLength="3"
-                  maxLength="150"
-                  onChange={handleChange}
-                />
-                <br />
-                {errors.username && <p>{errors.username}</p>}
-              </td>
-            </tr>
-            <tr>
-              <th>
-                <label htmlFor="id_email">Email:</label>
-              </th>
-              <td>
-                <input
-                  type="text"
-                  value={formData.email}
-                  name="email"
-                  minLength="3"
-                  maxLength="150"
-                  onChange={handleChange}
-                />
-                <br />
-                {errors.email && <p>{errors.email}</p>}
-              </td>
-            </tr>
-            <tr>
-              <th>
-                <label htmlFor="id_password1">Password:</label>
-              </th>
-              <td>
-                <input
-                  type="password"
-                  value={formData.password}
-                  name="password"
-                  minLength="3"
-                  onChange={handleChange}
-                />
-                <br />
-                {errors.password && <p>{errors.password}</p>}
-              </td>
-            </tr>
-            <tr>
-              <th>
-                <label htmlFor="id_password2">Password confirmation:</label>
-              </th>
-              <td>
-                <input
-                  type="password"
-                  value={formData.confirmPassword}
-                  name="confirmPassword"
-                  onChange={handleChange}
-                />
-                <br />
-                {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <button
-          type="submit"
-          disabled={disabledSubmitBtn}
-          className="btn submit"
-        >
-          Submit!
-        </button>
-      </form>
+   
+      <section>
+        <form onSubmit={handleSubmit} className="form-container signup">
+          <p>
+            <label htmlFor="id_username">{translations[lang].username}:</label>
+            <input
+              type="text"
+              value={formData.username}
+              name="username"
+              id="id_username"
+              minLength="3"
+              maxLength="150"
+              required
+              onChange={handleChange}
+            />
+            {errors.username && (
+              <span className="error-message">{errors.username}</span>
+            )}
+          </p>
+
+          <p>
+            <label htmlFor="id_email">{translations[lang].email}:</label>
+            <input
+              type="email"
+              value={formData.email}
+              name="email"
+              id="id_email"
+              minLength="3"
+              maxLength="150"
+              required
+              onChange={handleChange}
+            />
+            {errors.email && (
+              <span className="error-message">{errors.email}</span>
+            )}
+          </p>
+
+          <p>
+            <label htmlFor="id_password1">{translations[lang].password}:</label>
+            <input
+              type="password"
+              value={formData.password}
+              name="password"
+              id="id_password1"
+              minLength="3"
+              required
+              onChange={handleChange}
+            />
+            {errors.password && (
+              <span className="error-message">{errors.password}</span>
+            )}
+          </p>
+          <p>
+            <label htmlFor="id_password2">
+              {translations[lang].confirmPassword}:
+            </label>
+            <input
+              type="password"
+              value={formData.confirmPassword}
+              name="confirmPassword"
+              id="id_password2"
+              required
+              onChange={handleChange}
+            />
+            {errors.confirmPassword && (
+              <span className="error-message">{errors.confirmPassword}</span>
+            )}
+          </p>
+
+          <button
+            type="submit"
+            disabled={disabledSubmitBtn}
+            className="btn submit"
+          >
+            {translations[lang].signup}
+          </button>
+        </form>
+      </section>
     </>
   );
 }

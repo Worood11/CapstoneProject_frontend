@@ -2,9 +2,6 @@ import "./styles.css";
 import { Link } from "react-router";
 export default function BookstoreCard({ bookstore }) {
   if (!bookstore) return null;
-
-  console.log(bookstore, "line 6 ");
-
   return (
     <div className="bookstore-card">
       <Link to={`/bookstores/${bookstore.id}`} className="bookstore-link">

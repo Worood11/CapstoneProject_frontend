@@ -4,13 +4,13 @@
   --primary-light: #8cbf8c;
   --text-light: #ffffff;
   --text-dark: #333333;
-    --light-bg: #f8f9fa;
+  --light-bg: #f8f9fa;
 
 }
 
 * {
   margin: 0;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 body {
@@ -24,11 +24,47 @@ body {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 20px; 
+  gap: 20px;
   margin: 0 auto;
-  padding: 20px; 
+  padding: 20px;
   box-sizing: border-box;
-  max-width: 1200px; 
+  max-width: 1200px;
+}
+
+
+.search-input:focus,
+.city-filter:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 5px var(--primary-light);
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 20px auto;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+
+.search-input,
+.city-filter {
+  padding: 8px 12px;
+  border: 2px solid var(--primary-light);
+  border-radius: 8px;
+  outline: none;
+  background-color: var(--light-bg);
+  color: var(--text-dark);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  min-width: 200px;
+}
+
+
+.search-input:hover,
+.city-filter:hover {
+  border-color: var(--primary-dark);
 }
 
 #logout-form button {
@@ -47,18 +83,22 @@ body {
   color: var(--link-hover-color);
 }
 
-.form-container.signup > button {
-  max-width: 25%;
-  align-self: end;
-  margin-right: 40px;
-}
+@media (max-width: 600px) {
 
-.form-container.signup > table > tbody > tr > th {
-  width: 25%;
-}
+  .form-container th,
+  .form-container td {
+    display: block;
+    width: 100%;
+  }
 
-.form-container.signup input {
-  width: 100%;
-  align-self: end;
-  margin-right: 40px;
+  html[dir="rtl"] .form-container th,
+  html[dir="rtl"] .form-container td {
+    text-align: right !important;
+  }
+
+  html[dir="rtl"] .form-container input[type="text"],
+  html[dir="rtl"] .form-container input[type="url"] {
+    direction: rtl !important;
+    text-align: right !important;
+  }
 }

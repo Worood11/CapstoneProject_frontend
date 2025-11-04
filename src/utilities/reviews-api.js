@@ -1,4 +1,3 @@
-// reviews-api.js
 import sendRequest from "./sendRequest";
 
 export function getByBookstore(bookstoreId) {

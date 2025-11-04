@@ -26,3 +26,18 @@ export async function login(formData) {
 export async function logout() {
     localStorage.removeItem('token');
 }
+
+export async function getUser() {
+    try {
+        const token = localStorage.getItem('token');
+        if (token) {
+            const response = await sendRequest(`${url}/token/refresh/`)
+            localStorage.setItem('token', response.access);
+            return response.user
+        }
+        return null;
+    } catch (err) {
+        console.log(err);
+        return null;
+    }
+}

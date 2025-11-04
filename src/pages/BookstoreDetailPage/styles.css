@@ -75,6 +75,33 @@
 }
 
 
+.reviews-layout {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.reviews-list {
+    flex: 1 1 55%;
+}
+
+.review-form-side {
+    flex: 1 1 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.review-form-side .add-review-btn {
+    align-self: center;
+}
+
+
+
+
 .bookstore-actions {
     display: flex;
     gap: 20px;
@@ -149,6 +176,69 @@
 }
 
 
+.events-section {
+    background-color: var(--light-bg);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 25px;
+}
+
+.events-section h3 {
+    color: var(--primary-dark);
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.event-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.event-tag {
+    background-color: var(--primary-light);
+    color: var(--text-light);
+    border-radius: 20px;
+    padding: 8px 14px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.9rem;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.event-tag:hover {
+    transform: scale(1.05);
+    background-color: var(--primary-color);
+}
+
+.event-tag small {
+    font-size: 0.75rem;
+    opacity: 0.9;
+}
+
+
+.toggle-events-btn {
+    background-color: transparent;
+    color: var(--primary-dark);
+    border: 2px solid var(--primary-dark);
+    border-radius: 25px;
+    padding: 6px 14px;
+    margin-top: 14px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.toggle-events-btn:hover {
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+}
+
+
 
 @media (max-width: 600px) {
     .bookstore-details {
@@ -170,5 +260,24 @@
 
     .btn {
         width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .reviews-layout {
+        flex-direction: column;
+    }
+
+    .reviews-list,
+    .review-form-side {
+        flex: 1 1 100%;
+    }
+
+    .review-form-side {
+        align-items: stretch;
+    }
+
+    .review-form-side .add-review-btn {
+        align-self: stretch;
     }
 }
