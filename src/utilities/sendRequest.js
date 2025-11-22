@@ -1,7 +1,6 @@
 export default async function sendRequest(url, method = 'GET', payload) {
   const options = { method };
 
-  
   const token = localStorage.getItem('token');
   if (token) {
     options.headers = {
@@ -20,14 +19,23 @@ export default async function sendRequest(url, method = 'GET', payload) {
 
   try {
     const res = await fetch(`http://127.0.0.1:8000${url}`, options);
+
     if (res.ok) {
-      return res.json();
+      try {
+        return await res.json(); // ✅ must be inside function
+      } catch {
+        return null;
+      }
     } else {
       console.error(`Request failed with status ${res.status}`);
+      try {
+        const errData = await res.json();
+        console.error("Error data:", errData);
+      } catch {}
       return null;
     }
   } catch (err) {
-    console.error(" Network or server error:", err);
+    console.error("Network or server error:", err);
     return null;
   }
 }

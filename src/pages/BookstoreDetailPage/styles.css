@@ -84,6 +84,16 @@
     margin-top: 1rem;
 }
 
+.review-card p:first-of-type {
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+    text-transform: capitalize;
+
+}
+
+
 .reviews-list {
     flex: 1 1 55%;
 }
@@ -161,6 +171,11 @@
     position: absolute;
     top: 10px;
     right: 10px;
+}
+
+[dir="rtl"] .delete-btn {
+    right: auto;
+    left: 10px;
 }
 
 .btn.danger {

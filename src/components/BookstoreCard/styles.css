@@ -87,6 +87,26 @@ h2.bookstore-name {
   text-overflow: ellipsis;
 }
 
+.name-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Rating next to name */
+.avg-rating-inline {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.star {
+  color: #FFD700;
+}
+
 
 @media (max-width: 600px) {
   .bookstore-card {

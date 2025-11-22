@@ -6,14 +6,16 @@ import translations from "../../translate/translations";
 import * as usersAPI from "../../utilities/users-api.js";
 
 export default function SignupPage({ setUser }) {
-  const { lang, toggleLang } = useContext(LanguageContext);
+  const { lang } = useContext(LanguageContext);
   const navigate = useNavigate();
+
   const initialState = {
     username: "",
     password: "",
     confirmPassword: "",
     email: "",
   };
+
   const [formData, setFormData] = useState(initialState);
   const [errors, setErrors] = useState({
     username: "",
@@ -21,7 +23,8 @@ export default function SignupPage({ setUser }) {
     email: "",
     confirmPassword: "",
   });
-  let disabledSubmitBtn =
+
+  const disabledSubmitBtn =
     Object.values(errors).every((val) => val === "") &&
     Object.values(formData).every((val) => val !== "")
       ? false
@@ -35,40 +38,74 @@ export default function SignupPage({ setUser }) {
   function checkErrors({ target }) {
     const updateErrors = { ...errors };
 
+    // Username
     if (target.name === "username") {
       updateErrors.username =
         target.value.length < 3
           ? "Your username must be at least three characters long."
           : "";
     }
-    if (target.name === "password") {
-      updateErrors.password =
-        target.value.length < 3
-          ? "Your password must be at least three characters long."
-          : "";
-    }
-    if (target.name === "confirmPassword") {
-      updateErrors.confirmPassword =
-        target.value !== formData.password ? "Your passwords must match." : "";
-    }
+
+    // Email
     if (target.name === "email") {
       updateErrors.email = !target.value.includes("@")
-        ? "Your password must be a real email / include the '@' symbol."
+        ? "Your email must include the '@' symbol."
         : "";
+    }
+
+    // Password (strong validation)
+    if (target.name === "password") {
+      const val = target.value;
+      let msg = "";
+      if (val.length < 8) msg = "Password must be at least 8 characters long.";
+      else if (!/[A-Z]/.test(val))
+        msg = "Password must contain at least one uppercase letter.";
+      else if (!/[0-9]/.test(val))
+        msg = "Password must contain at least one number.";
+      else if (!/[!@#$%^&*(),.?":{}|<>]/.test(val))
+        msg = "Password must contain at least one special character.";
+      updateErrors.password = msg;
+    }
+
+    // Confirm password
+    if (target.name === "confirmPassword") {
+      updateErrors.confirmPassword =
+        target.value !== formData.password
+          ? "Your passwords must match."
+          : "";
     }
 
     setErrors(updateErrors);
   }
 
   async function handleSubmit(evt) {
+    evt.preventDefault();
     try {
-      evt.preventDefault();
       const newUser = await usersAPI.signup(formData);
       setUser(newUser);
       setFormData(initialState);
       navigate("/bookstores");
     } catch (err) {
       console.log(err);
+
+      // Show backend validation errors (if any)
+      if (err?.response?.data) {
+        const backendErrors = err.response.data;
+        const updateErrors = { ...errors };
+
+        if (backendErrors.password) {
+          updateErrors.password = backendErrors.password.join(" ");
+        }
+        if (backendErrors.username) {
+          updateErrors.username = backendErrors.username.join(" ");
+        }
+        if (backendErrors.email) {
+          updateErrors.email = backendErrors.email.join(" ");
+        }
+
+        setErrors(updateErrors);
+      }
+
       setUser(null);
     }
   }
@@ -76,9 +113,9 @@ export default function SignupPage({ setUser }) {
   return (
     <>
       <div className="page-header">
-        <h1>{translations[lang].signup}</h1>{" "}
+        <h1>{translations[lang].signup}</h1>
       </div>
-   
+
       <section>
         <form onSubmit={handleSubmit} className="form-container signup">
           <p>
@@ -88,9 +125,9 @@ export default function SignupPage({ setUser }) {
               value={formData.username}
               name="username"
               id="id_username"
-              minLength="3"
-              maxLength="150"
               required
+              minLength={3}
+              maxLength={150}
               onChange={handleChange}
             />
             {errors.username && (
@@ -105,8 +142,6 @@ export default function SignupPage({ setUser }) {
               value={formData.email}
               name="email"
               id="id_email"
-              minLength="3"
-              maxLength="150"
               required
               onChange={handleChange}
             />
@@ -122,7 +157,6 @@ export default function SignupPage({ setUser }) {
               value={formData.password}
               name="password"
               id="id_password1"
-              minLength="3"
               required
               onChange={handleChange}
             />
@@ -130,6 +164,7 @@ export default function SignupPage({ setUser }) {
               <span className="error-message">{errors.password}</span>
             )}
           </p>
+
           <p>
             <label htmlFor="id_password2">
               {translations[lang].confirmPassword}:

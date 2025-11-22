@@ -79,6 +79,20 @@
     z-index: 1001;
   }
 
+  .theme-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: transform 0.2s ease;
+  }
+
+  .theme-btn:hover {
+    transform: scale(1.1);
+  }
+
+
   .nav-links {
     position: fixed;
     top: 60px;
@@ -93,6 +107,7 @@
     transition: all 0.3s ease-in-out;
     z-index: 1000;
   }
+
   .ltr .nav-links {
     right: -100%;
   }
@@ -101,7 +116,7 @@
     right: 0;
   }
 
- 
+
   .rtl .nav-links {
     left: -100%;
   }

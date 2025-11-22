@@ -17,32 +17,39 @@ export default function BookstoreDetailPage({ user }) {
   const [events, setEvents] = useState([]);
   const [showAllEvents, setShowAllEvents] = useState(false);
   const { id } = useParams();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getAndSetDetail() {
       try {
         const bookstore = await bookstoreAPI.show(id);
-        setBookstoreDetail(bookstore);
+        setBookstoreDetail(bookstore || null);
 
         const reviewsData = await reviewsAPI.getByBookstore(id);
-        setReviews(reviewsData);
+        setReviews(reviewsData || []); 
 
         const eventsData = await eventsAPI.getByBookstore(id);
-        setEvents(eventsData);
+        setEvents(eventsData || []);
       } catch (err) {
-        console.log(err);
+        console.error(err);
         setBookstoreDetail(null);
+        setReviews([]);
+        setEvents([]);
+      } finally {
+        setLoading(false);
       }
     }
     if (id) getAndSetDetail();
   }, [id]);
 
-  if (!bookstoreDetail)
-    return (
-      <h3>{"Loading bookstore details..."}</h3>
-    );
+  if (loading) return <h3>{"Loading bookstore details..."}</h3>;
+  if (!bookstoreDetail) return <h3>{"Bookstore not found."}</h3>;
 
   const visibleEvents = showAllEvents ? events : events.slice(0, 3);
+
+ 
+  const canDeleteReview = (review) =>
+    user && (review.user === user.id || user.role === "admin");
 
   return (
     <section className="detail-bookstore-container">
@@ -70,7 +77,7 @@ export default function BookstoreDetailPage({ user }) {
               rel="noopener noreferrer"
               className="map-link"
             >
-             Open Map
+              Open Map
             </a>
           ) : (
             "Unknown"
@@ -123,32 +130,39 @@ export default function BookstoreDetailPage({ user }) {
             ) : (
               reviews.map((review) => (
                 <div key={review.id} className="review-card">
+                  <p>
+                    {translations[lang].byUser}: {review.username || "Unknown"}
+                  </p>
                   <h4>{review.title}</h4>
                   <p>
                     <strong>{translations[lang].rating}:</strong>{" "}
                     <span style={{ color: "#FFD700" }}>
-                      {"★".repeat(review.rating) +
-                        "☆".repeat(5 - review.rating)}
+                      {"★".repeat(review.rating || 0) +
+                        "☆".repeat(5 - (review.rating || 0))}
                     </span>
                   </p>
                   <p>{review.body}</p>
                   <small>
                     {translations[lang].postedOn}{" "}
-                    {new Date(review.created_at).toLocaleDateString()}
+                    {review.created_at
+                      ? new Date(review.created_at).toLocaleDateString()
+                      : "Unknown"}
                   </small>
-                  <button
-                    className="delete-btn"
-                    onClick={async () => {
-                      try {
-                        await reviewsAPI.remove(review.id);
-                        setReviews(reviews.filter((r) => r.id !== review.id));
-                      } catch (err) {
-                        console.log(err);
-                      }
-                    }}
-                  >
-                    &times;
-                  </button>
+                  {canDeleteReview(review) && (
+                    <button
+                      className="delete-btn"
+                      onClick={async () => {
+                        try {
+                          await reviewsAPI.remove(review.id);
+                          setReviews(reviews.filter((r) => r.id !== review.id));
+                        } catch (err) {
+                          console.error(err);
+                        }
+                      }}
+                    >
+                      &times;
+                    </button>
+                  )}
                 </div>
               ))
             )}
@@ -167,20 +181,20 @@ export default function BookstoreDetailPage({ user }) {
 
       <div className="bookstore-actions">
         {user?.role === "admin" && (
-          <Link
-            to={`/bookstores/edit/${bookstoreDetail.id}`}
-            className="btn primary"
-          >
-            {translations[lang].edit || "Edit"}
-          </Link>
-        )}
-        {user?.role === "admin" && (
-          <Link
-            to={`/bookstores/confirm_delete/${bookstoreDetail.id}`}
-            className="btn danger"
-          >
-            {translations[lang].btndelete || "Delete"}
-          </Link>
+          <>
+            <Link
+              to={`/bookstores/edit/${bookstoreDetail.id}`}
+              className="btn primary"
+            >
+              {translations[lang].edit || "Edit"}
+            </Link>
+            <Link
+              to={`/bookstores/confirm_delete/${bookstoreDetail.id}`}
+              className="btn danger"
+            >
+              {translations[lang].btndelete || "Delete"}
+            </Link>
+          </>
         )}
       </div>
     </section>

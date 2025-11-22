@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router";
 import { LanguageContext } from "../../context/LanguageContext";
 import translations from "../../translate/translations";
+
 // APIs
 import * as usersAPI from "../../utilities/users-api";
 
@@ -45,9 +46,7 @@ export default function Navbar({ user, setUser }) {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/events/new">
-                    {translations[lang].addEvent}
-                  </Link>
+                  <Link to="/events/new">{translations[lang].addEvent}</Link>
                 </li>
               </>
             )}

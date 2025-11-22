@@ -53,6 +53,7 @@ const translations = {
     titlePlaceholder: "Review title",
     postedOn: "Posted on",
     adminNoReview: "Admins cannot add reviews.",
+    byUser: "By", 
   },
   ar: {
     logo: "محطة الكتب",
@@ -107,6 +108,7 @@ const translations = {
     titlePlaceholder: "عنوان المراجعة",
     postedOn: "تم النشر في",
     adminNoReview: "المشرفون لا يمكنهم إضافة التعليقات.",
+    byUser: "بواسطة",
 
   
   },
