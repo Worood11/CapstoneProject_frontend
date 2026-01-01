@@ -46,11 +46,6 @@ This repository contains all React components, pages, routes, and styling for th
 
 ---
 
-### 🔗 Backend Repository
-👉 [Bookstop Backend Repository](https://github.com/Worood11/CapstoneProject_backend)
-
----
-
 ### 🌐 Live Frontend Site
 👉 [Bookstop Frontend Deployment Link](http://localhost:5173/)  
 
